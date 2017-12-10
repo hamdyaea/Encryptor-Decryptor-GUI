@@ -11,7 +11,7 @@ import sys
 
 def encrypt(key, filename):
     chunksize = 64 * 1024
-    outputFile = filename + "encrypted"#(encrypted)"
+    outputFile = filename + "-encrypted"
     filesize = str(os.path.getsize(filename)).zfill(16)
     IV = Random.new().read(16)
 
