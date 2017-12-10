@@ -2,18 +2,21 @@
 # please install crypto and pycrypto for python3
 # sudo pip3 install crypto
 # sudo pip3 install pycrypto
-# In this version the file must be in th same directory
+# install easygui for python 3
+# In this version the file must be in the same directory
 
 
 import os
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
+from easygui import *
+import sys
 
 
 def encrypt(key, filename):
     chunksize = 64 * 1024
-    outputFile = "(encrypted)" + filename
+    outputFile = filename + "encrypted"#(encrypted)"
     filesize = str(os.path.getsize(filename)).zfill(16)
     IV = Random.new().read(16)
 
@@ -37,7 +40,7 @@ def encrypt(key, filename):
 
 def decrypt(key, filename):
     chunksize = 64 * 1024
-    outputFile = filename[11:]
+    outputFile = filename
 
     with open(filename, 'rb') as infile:
         filesize = int(infile.read(16))
@@ -62,20 +65,24 @@ def getKey(password):
 
 
 def Main():
-    choice = input("Would you like to (E)ncrypt or (D)ecrypt?: ")
+    image = "./images/encryption.gif"
+    msg = "Do you want to encrypt or decrypt a file ?"
+    choices = ["Encrypt", "Decrypt", "Exit"]
+    reply = buttonbox(msg, image=image, choices=choices)
 
-    if choice == 'E':
-        filename = input("File to encrypt: ")
-        password = input("Password: ")
-        encrypt(getKey(password), filename)
-        print("Done.")
-    elif choice == 'D':
-        filename = input("File to decrypt: ")
-        password = input("Password: ")
-        decrypt(getKey(password), filename)
-        print("Done.")
+
+    if reply == 'Encrypt':
+        filename = fileopenbox(msg="Select the file to Encrypt", title="Select the file to Encrypt", default='*', filetypes=None, multiple=False)
+        password = passwordbox(msg="Enter a password",title="Enter a password",default="")
+        encrypt(getKey(password),filename)
+
+    elif reply == 'Decrypt':
+        filename = fileopenbox(msg="Select the file to Decrypt", title="Select the file to Decrypt", default='*', filetypes=None, multiple=False)
+        password = passwordbox(msg="Enter a password",title="Enter a password",default="")
+        decrypt(getKey(password),filename)
+
     else:
-        print("No Option selected, closing...")
+        sys.exit(0)
 
 
 if __name__ == '__main__':
