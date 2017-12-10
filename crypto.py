@@ -72,12 +72,12 @@ def Main():
 
 
     if reply == 'Encrypt':
-        filename = fileopenbox(msg="Select the file to Encrypt", title="Select the file to Encrypt", default='*', filetypes=None, multiple=False)
+        filename = fileopenbox(msg="Select the file to Encrypt", title="", default='*', filetypes=None, multiple=False)
         password = passwordbox(msg="Enter a password",title="Enter a password",default="")
         encrypt(getKey(password),filename)
 
     elif reply == 'Decrypt':
-        filename = fileopenbox(msg="Select the file to Decrypt", title="Select the file to Decrypt", default='*', filetypes=None, multiple=False)
+        filename = fileopenbox(msg="Select the file to Decrypt", title="", default='*', filetypes=None, multiple=False)
         password = passwordbox(msg="Enter a password",title="Enter a password",default="")
         decrypt(getKey(password),filename)
 
