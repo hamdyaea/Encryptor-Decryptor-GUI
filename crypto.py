@@ -1,9 +1,4 @@
 # Developer / Author : Hamdy Abou El Anein
-# please install crypto and pycrypto for python3
-# sudo pip3 install crypto
-# sudo pip3 install pycrypto
-# install easygui for python 3
-# In this version the file must be in the same directory
 
 
 import os
