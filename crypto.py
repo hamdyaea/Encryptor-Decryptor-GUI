@@ -77,7 +77,6 @@ def gui() -> None:
     from tkinter import filedialog, messagebox, simpledialog
     root = tk.Tk()
     root.title("Daylight File Encryption")
-    root.geometry("350x150")
     def run(mode: str) -> None:
         name = filedialog.askopenfilename(parent=root)
         if not name:
@@ -91,6 +90,10 @@ def gui() -> None:
             messagebox.showerror("Operation failed", str(exc), parent=root)
         else:
             messagebox.showinfo("Completed", f"Created {result}\nOriginal file retained.", parent=root)
+    artwork = tk.PhotoImage(file=str(Path(__file__).resolve().parent / "images/encryption-ui.png"))
+    illustration = tk.Label(root, image=artwork)
+    illustration.image = artwork
+    illustration.pack()
     tk.Label(root, text="Authenticated encryption; original files are preserved.").pack(pady=10)
     tk.Button(root, text="Encrypt file", command=lambda: run("encrypt")).pack()
     tk.Button(root, text="Decrypt .dle file", command=lambda: run("decrypt")).pack()
